@@ -9,8 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack(content: {
+            let CARD_RADIUS: CGFloat = 10.0
+            RoundedRectangle(cornerRadius: CARD_RADIUS).fill(Color.white)
+            RoundedRectangle(cornerRadius: CARD_RADIUS).stroke(lineWidth: 3.0)
+            Text("👻")
+        })
+        .padding()
+        .foregroundColor(Color.orange)
+        .font(Font.largeTitle)
     }
 }
 
