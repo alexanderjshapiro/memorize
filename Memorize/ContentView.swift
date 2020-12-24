@@ -9,15 +9,33 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ZStack(content: {
-            let CARD_RADIUS: CGFloat = 10.0
-            RoundedRectangle(cornerRadius: CARD_RADIUS).fill(Color.white)
-            RoundedRectangle(cornerRadius: CARD_RADIUS).stroke(lineWidth: 3.0)
-            Text("👻")
-        })
+        HStack {
+            ForEach(0..<4) { index in
+                CardView(isFaceUp: false)
+            }
+        }
         .padding()
         .foregroundColor(Color.orange)
         .font(Font.largeTitle)
+    }
+}
+
+struct CardView: View {
+    let CARD_RADIUS: CGFloat = 10.0
+    var isFaceUp: Bool
+    var body: some View {
+        ZStack {
+            if isFaceUp {
+                RoundedRectangle(cornerRadius: CARD_RADIUS).fill(Color.orange)
+            } else{
+                RoundedRectangle(cornerRadius: CARD_RADIUS).fill(Color.white)
+                RoundedRectangle(cornerRadius: CARD_RADIUS).stroke(lineWidth: 3.0)
+                Text("👻")
+            }
+            
+            
+            
+        }
     }
 }
 
