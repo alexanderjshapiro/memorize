@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     var emojiMemoryGame: EmojiMemoryGame
-    
     var body: some View {
         HStack {
             ForEach(emojiMemoryGame.cards) { card in
@@ -20,7 +19,7 @@ struct ContentView: View {
         }
         .padding()
         .foregroundColor(Color.orange)
-        .font(Font.largeTitle)
+        .font(emojiMemoryGame.cards.count < 5 ? Font.largeTitle : Font.title2)
     }
 }
 
@@ -36,10 +35,8 @@ struct CardView: View {
             } else{
                 RoundedRectangle(cornerRadius: CARD_RADIUS).fill(Color.orange)
             }
-            
-            
-            
         }
+        .aspectRatio(CGSize(width: 2, height: 3), contentMode: .fit)
     }
 }
 

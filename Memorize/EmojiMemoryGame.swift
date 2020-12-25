@@ -9,10 +9,12 @@ import SwiftUI
 
 class EmojiMemoryGame {
     private var memoryGame: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
+    var fontSize = Font.largeTitle
     
     static func createMemoryGame() -> MemoryGame<String> {
-        let emojis = ["👻","🎃","🕷"]
-        return MemoryGame<String>(numPairs: emojis.count) { pairIndex in emojis[pairIndex] }
+        let emojis = ["👻","🎃","🕷","🕸","💀","🧟","👹","👺","🤡","👽","🧛‍♂️","🩸"]
+        let shuffledEmojis = emojis.shuffled()
+        return MemoryGame<String>(numPairs: emojis.count) { pairIndex in shuffledEmojis[pairIndex] }
     }
     
     // MARK: Access to model

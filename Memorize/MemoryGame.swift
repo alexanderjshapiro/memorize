@@ -16,11 +16,13 @@ struct MemoryGame<CardContent> {
     
     init(numPairs: Int, cardContentFactory: (Int) -> CardContent) {
         cards = Array<Card>()
-        for pairIndex in 0..<numPairs {
+        let random = Int.random(in: 2...5)
+        for pairIndex in 0..<random {
             let content = cardContentFactory(pairIndex)
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2+1))
         }
+        cards.shuffle()
     }
     
     struct Card: Identifiable {
