@@ -17,14 +17,11 @@ class EmojiMemoryGame: ObservableObject {
         return MemoryGame<String>(numPairs: emojis.count) { pairIndex in shuffledEmojis[pairIndex] }
     }
     
-    // MARK: - Access to model
+    // MARK: Access to model
     
-    var cards: Array<MemoryGame<String>.Card> {
-        memoryGame.cards
-    }
+    var cards: Array<MemoryGame<String>.Card> { memoryGame.cards }
     
-    // MARK: - Intents
-    func choose(_ card: MemoryGame<String>.Card) {
-        memoryGame.choose(card)
-    }
+    // MARK: Intents
+    
+    func choose(_ card: MemoryGame<String>.Card) { memoryGame.choose(card) }
 }
