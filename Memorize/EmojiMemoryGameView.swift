@@ -10,12 +10,22 @@ import SwiftUI
 struct EmojiMemoryGameView: View {
     @ObservedObject var emojiMemoryGame: EmojiMemoryGame
     var body: some View {
-        Grid(emojiMemoryGame.cards) { card in
-            CardView(card)
-            .onTapGesture { emojiMemoryGame.choose(card) }
+        VStack {
+            HStack {
+                Text(emojiMemoryGame.theme.capitalized)
+                    .font(Font.largeTitle)
+                    .bold()
+                Spacer()
+                Text("\(emojiMemoryGame.score)").font(Font.system(Font.TextStyle.title, design: Font.Design.monospaced))
+            }
             .padding()
+            Grid(emojiMemoryGame.cards) { card in
+                CardView(card)
+                    .onTapGesture { emojiMemoryGame.choose(card) }
+                    .padding()
+            }
+            Button("New Game") { emojiMemoryGame.newGame() }
         }
-        .padding()
     }
 }
 

@@ -8,6 +8,8 @@
 import Foundation
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
+    var theme: String
+    var score: Int = 0
     var cards: Array<Card>
     
     var indexOfFaceUp: Int? {
@@ -26,18 +28,27 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
                 if cards[chosenIndex].content == cards[potentialMatchIndex].content {
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
+                    score += 2
+                } else {
+                    if cards[chosenIndex].wasSeen {
+                        score -= 1
+                    }
+                    if cards[potentialMatchIndex].wasSeen {
+                        score -= 1
+                    }
                 }
                 cards[chosenIndex].isFaceUp = true
+                cards[chosenIndex].wasSeen = true
             } else {
                 indexOfFaceUp = chosenIndex
             }
         }
     }
     
-    init(numPairs: Int, createCard: (Int) -> CardContent) {
+    init(theme: String, numPairs: Int, createCard: (Int) -> CardContent) {
+        self.theme = theme
         cards = Array<Card>()
-        let random = Int.random(in: 2...5)
-        for pairIndex in 0..<random {
+        for pairIndex in 0..<numPairs {
             let content = createCard(pairIndex)
             cards.append(Card(content: content, id: pairIndex*2))
             cards.append(Card(content: content, id: pairIndex*2+1))
@@ -48,6 +59,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
     struct Card: Identifiable {
         var isFaceUp: Bool = false
         var isMatched: Bool = false
+        var wasSeen: Bool = false
         var content: CardContent
         var id: Int
     }
