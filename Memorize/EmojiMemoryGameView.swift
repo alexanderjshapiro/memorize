@@ -17,23 +17,26 @@ struct EmojiMemoryGameView: View {
                     .bold()
                 Spacer()
                 Text("\(emojiMemoryGame.score)").font(Font.system(Font.TextStyle.title, design: Font.Design.monospaced))
-            }
-            .padding()
+            }.padding()
+            Divider()
             Grid(emojiMemoryGame.cards) { card in
-                CardView(card)
+                CardView(card, color: emojiMemoryGame.color)
                     .onTapGesture { emojiMemoryGame.choose(card) }
                     .padding()
             }
-            Button("New Game") { emojiMemoryGame.newGame() }
+            Divider()
+            Button("New Game") { emojiMemoryGame.newGame() }.padding()
         }
     }
 }
 
 struct CardView: View {
     var card: MemoryGame<String>.Card
+    var color: Color
     
-    init(_ card: MemoryGame<String>.Card) {
+    init(_ card: MemoryGame<String>.Card, color: Color) {
         self.card = card
+        self.color = color
     }
     
     var body: some View {
@@ -46,11 +49,11 @@ struct CardView: View {
                 } else {
                     if !card.isMatched {
                         RoundedRectangle(cornerRadius: cornerRadius).stroke(lineWidth: edgeLineWidth)
-                        RoundedRectangle(cornerRadius: cornerRadius).fill(cardColor)
+                        RoundedRectangle(cornerRadius: cornerRadius).fill(color)
                     }
                 }
             }
-            .foregroundColor(Color.orange)
+            .foregroundColor(color)
             .font(Font.system(size: fontSize(for: geometry.size)))
         }
     }
@@ -62,7 +65,6 @@ struct CardView: View {
     let edgeLineWidth: CGFloat = 3.0
     let fontScalingFactor: CGFloat = 0.75
     func fontSize(for size: CGSize) -> CGFloat { min(size.width, size.height) * fontScalingFactor }
-    let cardColor = Color.orange
     let cardFaceColor = Color.white
 }
 

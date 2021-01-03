@@ -5,10 +5,11 @@
 //  Created by Alexander Shapiro on 12/25/20.
 //
 
-import Foundation
+import SwiftUI
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
     var theme: String
+    var color: Color
     var score: Int = 0
     var cards: Array<Card>
     
@@ -45,8 +46,9 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
-    init(theme: String, numPairs: Int, createCard: (Int) -> CardContent) {
+    init(theme: String, color: Color, numPairs: Int, createCard: (Int) -> CardContent) {
         self.theme = theme
+        self.color = color
         cards = Array<Card>()
         for pairIndex in 0..<numPairs {
             let content = createCard(pairIndex)

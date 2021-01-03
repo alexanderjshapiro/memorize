@@ -12,23 +12,25 @@ class EmojiMemoryGame: ObservableObject {
     
     static func createMemoryGame() -> MemoryGame<String> {
         let themes = [
-            "animals": (emojis: ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐔","🐧","🐦","🐺","🐗","🐴","🐝"], forcedNumPairs: nil),
-            "nature": (emojis: ["🌵","🌲","🌳","🌴","🌱","🌿","☘️","🍂","🍁","🍄","🌾","🌷","🌹","🌺","🌸","🌼","🌻"], forcedNumPairs: nil),
-            "fruit": (emojis: ["🍎","🍊","🍌","🍉","🍇","🍓","🫐","🍒","🍑","🥭","🍍","🥥","🥝"], forcedNumPairs: nil),
-            "sports": (emojis: ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏","🎱","🏓","🏸","🏒","🥍","🏏","🥊"], forcedNumPairs: nil),
-            "halloween": (emojis: ["👻","🎃","🕷","🕸","💀","🧟","👹","👺","🤡","👽","🧛‍♂️","🩸"], forcedNumPairs: nil),
-            "christmas": (emojis: ["🦌","🎄","❄️","⛄️","🎁","🧤","🧣"], forcedNumPairs: 6)
+            "animals": (emojis: ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐔","🐧","🐦","🐺","🐗","🐴","🐝"], color: nil, forcedNumPairs: nil),
+            "nature": (emojis: ["🌵","🌲","🌳","🌴","🌱","🌿","☘️","🍂","🍁","🍄","🌾","🌷","🌹","🌺","🌸","🌼","🌻"], color: Color.green, forcedNumPairs: nil),
+            "fruit": (emojis: ["🍎","🍊","🍌","🍉","🍇","🍓","🫐","🍒","🍑","🥭","🍍","🥥","🥝"], color: nil, forcedNumPairs: nil),
+            "sports": (emojis: ["⚽️","🏀","🏈","⚾️","🥎","🎾","🏐","🏉","🥏","🎱","🏓","🏸","🏒","🥍","🏏","🥊"], color: nil, forcedNumPairs: nil),
+            "halloween": (emojis: ["👻","🎃","🕷","🕸","💀","🧟","👹","👺","🤡","👽","🧛‍♂️","🩸"], color: Color.orange, forcedNumPairs: nil),
+            "christmas": (emojis: ["🦌","🎄","❄️","⛄️","🎁","🧤","🧣"], color: Color.green, forcedNumPairs: 6)
         ]
         
         let emojiGameTheme = themes.randomElement()!.key
         let selectedEmojis = themes[emojiGameTheme]!.emojis.shuffled()
-        let numPairs = themes[emojiGameTheme]!.forcedNumPairs ?? ( (selectedEmojis.count < 5) ? selectedEmojis.count : Int.random(in: 2...5) )
-        return MemoryGame<String>(theme: emojiGameTheme, numPairs: numPairs) { pairIndex in selectedEmojis[pairIndex] }
+        let emojiGameColor = themes[emojiGameTheme]!.color ?? Color.gray
+        let emojiGameNumPairs = themes[emojiGameTheme]!.forcedNumPairs ?? ( (selectedEmojis.count < 5) ? selectedEmojis.count : Int.random(in: 2...5) )
+        return MemoryGame<String>(theme: emojiGameTheme, color: emojiGameColor, numPairs: emojiGameNumPairs) { pairIndex in selectedEmojis[pairIndex] }
     }
     
     // MARK: Access to model
     
     var theme: String { memoryGame.theme }
+    var color: Color { memoryGame.color }
     var score: Int { memoryGame.score }
     var cards: Array<MemoryGame<String>.Card> { memoryGame.cards }
     
