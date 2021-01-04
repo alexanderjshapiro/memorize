@@ -10,7 +10,7 @@ import SwiftUI
 class EmojiMemoryGame: ObservableObject {
     @Published private var memoryGame: MemoryGame<String> = EmojiMemoryGame.createMemoryGame()
     
-    static func createMemoryGame() -> MemoryGame<String> {
+    private static func createMemoryGame() -> MemoryGame<String> {
         let themes = [
             "animals": (emojis: ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐻‍❄️","🐨","🐯","🦁","🐮","🐷","🐸","🐵","🐔","🐧","🐦","🐺","🐗","🐴","🐝"], color: nil, forcedNumPairs: nil),
             "nature": (emojis: ["🌵","🌲","🌳","🌴","🌱","🌿","☘️","🍂","🍁","🍄","🌾","🌷","🌹","🌺","🌸","🌼","🌻"], color: Color.green, forcedNumPairs: nil),

@@ -60,12 +60,12 @@ struct CardView: View {
     
     // MARK: Drawing Constants
     
-    let cardAspectRatio: CGFloat = 2/3
-    let cornerRadius: CGFloat = 10.0
-    let edgeLineWidth: CGFloat = 3.0
-    let fontScalingFactor: CGFloat = 0.75
-    func fontSize(for size: CGSize) -> CGFloat { min(size.width, size.height) * fontScalingFactor }
-    let cardFaceColor = Color.white
+    private let cardAspectRatio: CGFloat = 2/3
+    private let cornerRadius: CGFloat = 10.0
+    private let edgeLineWidth: CGFloat = 3.0
+    private let fontScalingFactor: CGFloat = 0.75
+    private func fontSize(for size: CGSize) -> CGFloat { min(size.width, size.height) * fontScalingFactor }
+    private let cardFaceColor = Color.white
 }
 
 struct ContentView_Previews: PreviewProvider {
