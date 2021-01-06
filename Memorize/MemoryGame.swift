@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct MemoryGame<CardContent> where CardContent: Equatable {
-    var theme: String
-    var color: Color
     var score: Int = 0
     private(set) var cards: Array<Card>
     
@@ -46,9 +44,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable {
         }
     }
     
-    init(theme: String, color: Color, numPairs: Int, createCard: (Int) -> CardContent) {
-        self.theme = theme
-        self.color = color
+    init(numPairs: Int, createCard: (Int) -> CardContent) {
         cards = Array<Card>()
         for pairIndex in 0..<numPairs {
             let content = createCard(pairIndex)
