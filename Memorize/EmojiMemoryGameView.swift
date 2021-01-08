@@ -21,11 +21,15 @@ struct EmojiMemoryGameView: View {
             Divider()
             Grid(emojiMemoryGame.cards) { card in
                 CardView(card, color: emojiMemoryGame.color)
-                    .onTapGesture { emojiMemoryGame.choose(card) }
+                    .onTapGesture {
+                        withAnimation(Animation.linear(duration: 0.75)) { emojiMemoryGame.choose(card) }
+                    }
                     .padding()
             }
             Divider()
-            Button("New Game") { emojiMemoryGame.newGame() }.padding()
+            Button("New Game") {
+                withAnimation(Animation.easeInOut) { emojiMemoryGame.newGame() }
+            }.padding()
         }
     }
 }
@@ -43,10 +47,14 @@ struct CardView: View {
         GeometryReader { geometry in
             if card.isFaceUp || !card.isMatched {
                 ZStack {
-                    Text(card.content).font(Font.system(size: fontSize(for: geometry.size)))
+                    Text(card.content)
+                        .font(Font.system(size: fontSize(for: geometry.size)))
+                        .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                        .animation(card.isMatched ? Animation.linear(duration: 1.0).repeatForever(autoreverses: false) : Animation.default)
                 }
                 .cardify(isFaceUp: card.isFaceUp, color: color)
                 .foregroundColor(color)
+                .transition(AnyTransition.scale)
             }
         }
     }
